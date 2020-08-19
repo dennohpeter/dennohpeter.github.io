@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Getting started with static site generators — python</title>
+    <!-- iOS meta tags and icons -->
+    <meta name="apple-mobile-web-app-title" content="Dennoh Peter">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+
+    <link rel="manifest" href="/assets/favicon/manifest.json">
+    <link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#2d292b">
+    <link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+    <meta name="application-name" content="Dennoh Peter">
+    <!-- Tile for Win8 -->
+    <meta name="msapplication-TileColor" content="#b91d47">
+    <meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Description -->
+    <meta name="description"  content="I'm a software engineer & computer programmer"
+         />
+    <meta name="keywords" content="Programmer, Software Engineer, Rust Programmer, Python Programmer, Web Developer">
+    <!-- Pinterest -->
+    <meta name="p:domain_verify" content="969b53b624eb97d4e590ca7723f5cd72"/>
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="/assets/base.css">
+    
+<link rel="stylesheet" type="text/css" href="/assets/blog.css">
+
+</head>
+
+<body>
+    <header>
+    <div class="container">
+        <div class="dashboard">
+            <div>
+                <a href="/" aria-label="home">Home</a>
+                <a href="/about/" aria-label="about">About</a>
+                <a href="/tools/" aria-label="tools">Tools</a>
+                <a href="/projects/" aria-label="projects">Projects</a>
+            </div>
+            <div>
+                <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <defs>
+                        <symbol id="icon-dark-mode" viewBox="0 0 32 32">
+                            <path
+                                d="M17.067 21l1.533-4h-3.9l-2.3 6h2.579l-1.479 4.1 6.1-6.1h-2.533zM13.545 24h-5.546c-2.767 0-4.999-2.239-4.999-5 0-2.051 1.24-3.818 3.012-4.588-0.008-0.136-0.012-0.273-0.012-0.412 0-3.866 3.134-7 7-7 1.129 0 2.196 0.267 3.141 0.743-0.092-0.399-0.141-0.815-0.141-1.243 0-2.577 1.772-4.739 4.163-5.337 0.351-0.088 0.716-0.142 1.091-0.158-0.165 0.468-0.254 0.971-0.254 1.495 0 2.485 2.015 4.5 4.5 4.5 0.524 0 1.027-0.090 1.495-0.254-0.016 0.375-0.070 0.739-0.158 1.091-0.258 1.035-0.81 1.954-1.562 2.664v0c1.043 0.985 1.701 2.373 1.724 3.915 1.768 0.771 3.001 2.534 3.001 4.585 0 2.756-2.238 5-4.999 5h-7.001l-7 7 2.545-7zM24.477 9.875c0.57-0.503 1.011-1.148 1.269-1.88-0.081 0.004-0.163 0.005-0.246 0.005-3.038 0-5.5-2.462-5.5-5.5 0-0.082 0.002-0.164 0.005-0.246-1.751 0.616-3.005 2.284-3.005 4.246 0 0.8 0.209 1.55 0.574 2.201 0.386 0.333 0.734 0.707 1.039 1.116 0.839-0.518 1.828-0.817 2.886-0.817 1.097 0 2.119 0.321 2.977 0.875v0 0z">
+                            </path>
+                        </symbol>
+                        <symbol id="icon-light-mode" viewBox="0 0 32 32">
+                            <path
+                                d="M17.067 21l1.533-4h-3.9l-2.3 6h2.579l-1.479 4.1 6.1-6.1h-2.533zM19 23h5.997c2.211 0 4.003-1.795 4.003-4 0-1.877-1.299-3.453-3.042-3.884v0c0.028-0.202 0.042-0.407 0.042-0.616 0-2.485-2.015-4.5-4.5-4.5-1.226 0-2.337 0.49-3.148 1.285-0.991-1.949-3.015-3.285-5.352-3.285-3.314 0-6 2.686-6 6 0 0.377 0.035 0.745 0.101 1.102v0c-1.776 0.41-3.101 2.002-3.101 3.898 0 2.209 1.798 4 4.003 4h3.372l2.625-7h6l-1.5 4h3.5l-3 3zM13.545 24h-5.546c-2.767 0-4.999-2.239-4.999-5 0-2.051 1.24-3.818 3.012-4.588-0.008-0.136-0.012-0.273-0.012-0.412 0-3.866 3.134-7 7-7 1.129 0 2.196 0.267 3.141 0.743-0.092-0.399-0.141-0.815-0.141-1.243 0-2.577 1.772-4.739 4.163-5.337 0.351-0.088 0.716-0.142 1.091-0.158-0.165 0.468-0.254 0.971-0.254 1.495 0 2.485 2.015 4.5 4.5 4.5 0.524 0 1.027-0.090 1.495-0.254-0.016 0.375-0.070 0.739-0.158 1.091-0.258 1.035-0.81 1.954-1.562 2.664v0c1.043 0.985 1.701 2.373 1.724 3.915 1.768 0.771 3.001 2.534 3.001 4.585 0 2.756-2.238 5-4.999 5h-7.001l-7 7 2.545-7zM24.477 9.875c0.57-0.503 1.011-1.148 1.269-1.88-0.081 0.004-0.163 0.005-0.246 0.005-3.038 0-5.5-2.462-5.5-5.5 0-0.082 0.002-0.164 0.005-0.246-1.751 0.616-3.005 2.284-3.005 4.246 0 0.8 0.209 1.55 0.574 2.201 0.386 0.333 0.734 0.707 1.039 1.116 0.839-0.518 1.828-0.817 2.886-0.817 1.097 0 2.119 0.321 2.977 0.875v0 0z">
+                            </path>
+                        </symbol>
+                    </defs>
+                </svg>
+                <button class="switch-theme-button" aria-label="toggle theme">
+                    <svg class="icon">
+                        <use xlink:href="#icon-dark-mode"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+    
+
+    
+<div class="container">
+	<div class="row lead">
+		<div class="reading-progress reading-progress--tag-blog" style="width: 100%;"></div>
+		<div class="post">
+			<div class="post__sidebar-left">
+				<!-- <button class="post__toggle-toc-button" role="button" aria-label="Toggle table of contents">
+					</button> -->
+				<div class="post__toc">
+					
+				</div>
+			</div>
+			<div class="post__content">
+				<div class="post__header">
+					<div class="post__header-meta">
+						<a href="/blog/">Blog</a>
+						<span>March 20, 2020</span>
+					</div>
+					<h2 class="post__title"> Getting started with static site generators — python </h2>
+				</div>
+				<div class="post__feature-image">
+					<img src="/assets/images/static_websites.png" alt="getting-started-with-static-site-generators-python">
+				</div>
+				<section class="post__html">
+					<p>This article is not another long story you read out there, it's short, brief yet informative at the same time. It introduces you to static website generators in general, but later we will narrow down to building something useful with <a href="https://getStatik.com">Statik</a> — a static site generator for Python.</p>
+<p>With that said, here is the reason why this article is worthy your time. By the end, you will have learned :-</p>
+<ul>
+<li>
+<p>What's a static site generator</p>
+</li>
+<li>
+<p>How static sites work</p>
+</li>
+<li>
+<p>How dynamic sites work</p>
+</li>
+<li>
+<p>Why static websites</p>
+</li>
+<li>
+<p>And Limits of static websites</p>
+</li>
+<li>
+<p>Ideal use cases for static websites</p>
+</li>
+</ul>
+<h2 id="whats-a-static-site-generator">What's a static site generator</h2>
+<p>A <strong>static site generator</strong> is tool for generating static websites. It takes a set of source files and generates an entirely <strong>static website</strong> ready for <strong>deployment</strong>. This gives you more freedom to write your own HTML  and text in various format like Markdown, reStructured Text Format, yaml and many others.</p>
+<h2 id="so-how-do-static-sites-work">So how do static sites work?</h2>
+<p>Well, a static site refers to collection of pages that are contained in basic HTML, css and js files and served to the user as-is. This makes them to look the same for every user. You can then take these generated files and deploy them to any hosting provider.</p>
+<h2 id="how-about-dynamic-sites">How about dynamic sites?</h2>
+<p>With dynamic websites, content rendered to user is from database, so it's (<strong>database-driven content</strong>). This means content displayed might be different for different users depending on there activity, location or time of the day.
+There is a <a href="">Common Gateway Interface</a> <strong>CGI</strong> that enables websites, front-end to communicate with the database, back-end.
+Thus dynamic websites are more powerful yet complex to develop compared to static sites discussed above.
+This leads us to careful analysis of the trade-offs where we discuss why static? What does it offer attractive? and of course what is misses.</p>
+<h2 id="so-why-static-websites">So Why static websites?</h2>
+<h4 id="they-are-fast">They are Fast</h4>
+<p>By being fast we are referring to load time. This is because :-</p>
+<ul>
+<li>There is no database queries to get data to be displayed.</li>
+<li>
+<p>There is no templates to render.</p>
+</li>
+<li>
+<p>No client-server requests to process.</p>
+</li>
+</ul>
+<h4 id="they-are-secure">They are Secure</h4>
+<p>Since there is no database abstraction, attacks like SQL injection don't exist, this makes them damn secure.</p>
+<h4 id="they-are-cheap">They are Cheap</h4>
+<p>Cheap as in no-to less hosting and maintenance procedures and database setup to do. You only provide your static files for hosting and thats it.</p>
+<h4 id="lastly-they-are-scalable">Lastly, they are scalable</h4>
+<p>High unexpected traffic surges can crash your dynamic site. A static website is far ideal since delivering static website consumes very little resources.</p>
+<p>Everything has limits and  this is no exceptional.</p>
+<h2 id="limits-of-static-websites">Limits of static websites</h2>
+<ul>
+<li>
+<p>There is <strong>no content management system CMS</strong>, for non developers.</p>
+</li>
+<li>
+<p><strong>There is no user inputs</strong> like user forms, emails subscription.</p>
+<p>However this limit depends on your hosting provider, some like Netlify provide forms tags that you can use in your website and any form submission from your website will be delivered to you Netlify dashboard
+Or if you are thee guy, you can integrate a third party for handling your user inputs or build yours from scratch using ajax and deliver them to a particular endpoint.</p>
+</li>
+<li>
+<p><strong>There is no user login</strong></p>
+<p>This is because there is no database to lookup to. Work around for this is to use third party authentication clients like google auth, github auth etc.</p>
+</li>
+<li>
+<p><strong>There is no real time content</strong></p>
+<p>This means that for you to update your website you need to regenerate the whole website again with the updated content.</p>
+</li>
+</ul>
+<p>That's it as far as I know about static sites limits. Let's see some use cases for static websites</p>
+<h2 id="hmm-so-what-are-some-uses-cases-for-static-websites">Hmm, so what are some uses cases for static websites?</h2>
+<ul>
+<li>
+<p>Static websites are ideal for making portfolios. Some notable examples:  <a href="https://taniarascia.com">Tania Rascia</a>, <a href="https://chester.how">Chester How</a>, <a href="https://nehalist.io">Nehalist</a>, <a href="https://dennohpeter.com">Dennoh Peter</a> and so many others.</p>
+</li>
+<li>
+<p>Personal blogs are basically just text with images exactly what a static website needs.</p>
+</li>
+<li>
+<p>Information websites like: <a href="https://amanicenter.netlify.com">Amani Center</a>, <a href="https://developer.spotify.com">Spotify Developer Documentation</a>, <a href="https://www.markdownguide.org">Markdown Guide</a>.</p>
+</li>
+<li>
+<p>Landing pages are another great option, or any websites that is designed to showcase a product's key features.</p>
+</li>
+</ul>
+<h2 id="what-next">What Next</h2>
+<p>If your interest is intrigued, you might need to take a look at <a href="https://www.staticgen.com">StaticGen</a> and you will see a  wide variety of available static site generators in the market that are language language specific, meaning you will have short learning curve to get started.</p>
+<p>My static generator of choice is <a href="https://getstatik.com">Statik</a>, in the next article I will be telling you why <a href="https://getstatik.com">Statik</a> in dozen of static site generators out there. Until then, watch this space!</p>
+				</section>
+				<div class="post__footer">
+					<p>Published under
+						<span>
+							<a href="/blog/">Blog</a>
+						</span>
+						on March 20, 2020.
+					</p>
+					Latest update on March 20, 2020.
+				</div>
+			</div>
+			<div class="post__sidebar-right">
+				<div class="post__sidebar-right-content">
+					<!-- <div id="carbon-post">
+                    script to load ad
+                    </div> -->
+					<div class="post__related-posts">
+						<h3 class="post__related-title">
+							You may also like
+						</h3>
+						<a class="post-card  post-card--in-sidebar" href="/blog/getting-started-with-static-site-generators-python/">
+							<div class="post-card__feature-image"
+								style="background-image:url(/assets/images/static_websites.png)">
+							</div>
+							<div class="post-card__header">
+								<div class="post-card__meta">
+									<span class="post-card__date">
+										March 20, 2020
+									</span>
+								</div>
+								<h2 class="post-card__title">
+									Getting started with static site generators — python
+								</h2>
+							</div>
+							<section class="post-card__excerpt">
+								Websites can be divided into two groups: dynamic and static. What are the differences between them? Well, you about to find this out and much more in this article.
+							</section>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+    
+    <footer class="footer">
+    <div class="footer_social">
+        <a href="https://github.com/dennohpeter" target="_blank" aria-label="Github" title="Visit Dennoh's Github profile"
+            rel="nofollow noopener noreferrer">
+            <i data-feather="github"></i>
+        </a>
+        <a href="https://gitlab.com/dennohpeter" target="_blank" aria-label="Gitlab" title="Visit Dennoh's Gitlab profile"
+            rel="nofollow noopener noreferrer">
+            <i data-feather="gitlab"></i>
+        </a>
+        <a href="https://devpost.com/dennohpeter" target="_blank" aria-label="Devpost" title="Visit Dennoh's Devpost profile"
+            rel="nofollow noopener noreferrer">
+            <i data-feather="alert-octagon"></i>
+        </a>
+        <a href="https://twitter.com/dennohpeter" target="_blank" aria-label="Twitter" title="Visit Dennoh's Twitter profile"
+            rel="nofollow noopener noreferrer">
+            <i data-feather="twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/dennohpeter" target="_blank" aria-label="LinkedIn" title="Visit Dennoh's LinkedIn profile"
+            rel="nofollow noopener noreferrer">
+            <i data-feather="linkedin"></i>
+        </a>
+    </div>
+    <div class="footer_meta">
+        &copy; <a href="https://github.com/dennohpeter" target="_blank" rel="nofollow noopener noreferrer" class="link">
+            Dennoh Peter</a> 2020.
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="/assets/base.js"></script>
+    
+<script src="/assets/blog-details.js"></script>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166959153-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-166959153-1');
+    </script>
+</body>
+
+</html>
